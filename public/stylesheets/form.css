@@ -1,0 +1,221 @@
+
+
+.navigation{
+    height: 160px;
+    background: rgb(50, 50, 50);
+    display: flex;
+    flex-wrap: nowrap;
+} 
+
+
+.option{
+    background: linear-gradient(rgba(255, 255, 255,0.12335),rgba(255, 255, 255, 0.12335));
+    height: 100px;
+    width: 140px;
+    display: inline-block;
+    margin: 30px 30px 0px 0px;
+    border-radius: 5px ;
+}
+
+.option:hover, .option:focus{
+    background: linear-gradient(rgba(255,255,255,0.2),rgba(255,255,255,0.2));
+    border-radius: 11px;
+    transform: scaleX(1.071);
+    transform: scaleY(1.064);
+    transition: 0.2s linear;
+    border: 1px solid white;
+}
+
+.option i{
+    color: rgb(255, 255, 255);
+    font-size: 35px;
+    display: block ;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.option a{
+    text-decoration: none;
+    font-size: large;
+    color: aliceblue;
+    display: block ;
+    text-align: center;
+    font-weight: 500;
+    font-size: 19px;
+    margin-top: 12px;
+}
+
+h4{
+    letter-spacing: 1.18px;
+    font-weight: 900;
+    margin-left: 13px;
+    color: rgb(28, 0, 120);
+}
+h4 i{
+    color: rgb(4, 133, 4);
+}
+
+h4::after{
+    content: "";
+    display: block;
+    height: 1.2px ;
+    width: 130px;
+    margin: 8px 1px;
+    background: red;
+}
+
+.box{
+    margin-top: 25%;
+    background: white;
+    position: relative;
+    width: 60%;
+   
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 7.5px;
+    box-shadow: 2px 5px 12px rgba(0,0,0,0.5) ,-1px -2px 6px rgba(0,0,0,0.15)  ;
+    box-sizing: border-box;
+}
+ 
+@media screen and (max-width:445px){
+    .box{
+        width: 95%;
+        margin: 0px 1px;
+    }
+}
+
+form input{
+    outline: none;
+    border: none;
+    font-size: 17px;
+    border-bottom: 2px solid rgba(171, 171, 171 , 0.90);
+    padding: 14px 5px;
+    border-radius: 6px;
+    z-index: 0;
+}
+ 
+#button {
+    margin-left: 45%;
+}
+
+form input:hover , form input:focus , input form:active{
+    border-bottom:1.5px solid blue;
+    z-index: 1;
+}
+ 
+
+#forgot{
+    text-decoration: none;
+    font-size: 14.4px;
+    opacity: 0.8;
+    margin-right: 7px;
+}
+
+#forgot:hover{
+    opacity: 1;
+    transition: 0.25s linear;
+}
+
+
+
+#submit , button{
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    outline: none;
+    margin-left: 45%;
+}
+
+#submit:hover , button:hover{
+    opacity: 1;
+    transition: 0.4s linear;
+}
+
+
+
+.leadsBox{
+    background: linear-gradient(rgba(221, 221, 221, 0.85),rgba(221, 221, 221, 0.85));
+    min-height: calc(100vh - 160px);
+    z-index: -1;
+}
+
+
+.Lead{
+    background: white;
+    z-index: -1;
+    border: none;
+    outline: none;
+}
+
+.Lead button{
+    opacity: 0.5;
+    font-size: small;
+    font-weight: 300;   
+}
+
+.Lead button:hover{
+    opacity: 1;
+    font-weight: 650;
+    font-size: smaller;
+    transition: 0.25s linear;
+}
+
+.Lead:hover , .Lead:focus , .Leada:active{
+    box-shadow: 3px 3px 3px rgba(0,0,0,1) ;
+    z-index: 1;
+    border-radius: 7.5px;
+    transform: scale(1.03476,1.03476);
+    transition: 0.25s linear;
+}
+
+.Lead small{
+    font-size: 14.5px;
+}
+
+.Lead .leadName{
+    font-weight: 500;
+    font-size: 16.5px;
+}
+
+.filters{
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    color: white;
+    height: 70px;
+    background: linear-gradient(rgba(136, 106, 218, 0.694),rgba(136, 106, 218, 0.694));
+}
+
+
+.by{
+    display: inline-block;
+    height: 51px;
+    width: 115px;
+    background:  linear-gradient(rgba(79, 59, 135, 0.994),rgba(136, 106, 218, 0.994));
+    margin: 9px;
+    padding: 7px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+
+.by i , .by span{
+    color: rgb(255, 255, 255);
+    display: block ;
+    text-align: center;
+    margin-top: 0px;
+    font-weight: 450;
+}
+
+
+.by:hover , .by:active , .by:focus{
+    transform: scale(1.081,1.081);
+    border: 1px solid rgb(255, 255, 255);
+    transition: 0.2s linear;
+
+}
+
+
+

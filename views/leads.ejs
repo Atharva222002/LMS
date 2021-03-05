@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/stylesheets/leads.css">
+    <title>Leads</title>
+</head>
+
+<body>
+    <div class="navigation pl-5">
+        <div class="option">
+            <i class="far fa-file-code"></i>
+            <a href="/leads"><small>Leads Received</small></a>
+        </div>
+        <div class="option">
+            <i class="fas fa-plane"></i>
+            <a href="/leadSent"><small>Leads Sent</small></a>
+        </div>
+        <div class="option">
+            <i class="fas fa-plus"></i>
+            <a href="/form"><small>Add Lead</small></a>
+        </div>
+        <div class="option">
+            <i class="fas fa-sign-out-alt"></i>
+            <a href="#"><small>Logout</small></a>
+        </div>
+    </div>
+
+    <div class="container-fluid leadsBox py-5">
+        <div class="container">
+            <div class="row">
+                <% allLeads.forEach(function(lead){ %>
+                    <div class="col-12 col-sm-10 col-md-6 col-lg-4   offset-sm-1 offset-md-0 mb-3">
+                        <!--start of 1st lead-->
+                        <div class="row m-1 Lead">
+                            <div class="col-12 text-center pt-3 pb-2 leadName">Lead Name
+                            </div>
+                            <small class="col-12 text-justify pb-2">
+                                <span>Name : <%=lead.name%></span>
+                            </small>
+                            <small class="col-12 pb-2">
+                                <span>Cost </span>
+                                <span class="pl-1"> : <%=lead.value%></span>
+                            </small>
+                            <small class="col-12 pb-2">
+                                <span>Segment </span>
+                                <span class="pl-1"> : <%=lead.segment%></span>
+                            </small>
+                            <small class="col-12 pb-2">
+                                <span>From :</span>
+                                <span>
+                                    <%=lead.Submitted_By%>
+                                </span>
+                            </small>
+                            <% if(lead.curstatus==="open"){ %>
+                                <form action="/leads/<%=lead._id%>/reject" method="POST">
+                                    <div class="col-6 mb-2">
+                                        <div class="row pl-3 py-2 pr-2">
+                                            <button type="submit" class="btn btn-sm btn-danger  col-12">REJECT
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            
+                                    <form action="/leads/<%=lead._id%>/accept" method="POST">
+                                        <div class="col-6 mb-2">
+                                            <div class="row pr-3 pl-1 py-2">
+                                                <button type="submit" class="btn btn-sm btn-success  col-12">ACCEPT
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <% }else if(lead.curstatus==="close"){ %>
+                                        <small class="col-12 pb-2">
+                                            <span>Status :</span>
+                                            <span>
+                                                <%=lead.curstatus%>
+                                            </span>
+                                        </small>
+                                <% }else{ %>
+                                        <form action="/leads/<%=lead._id%>/close" method="POST">
+                                            <div class="col-6 mb-2">
+                                                <div class="row pr-3 pl-1 py-2">
+                                                    <button type="submit" class="btn btn-sm btn-success  col-12">CLOSE
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <%}%>
+                        </div>
+                    </div>
+                    <!--end of 1st lead-->
+                    <%})%>
+                        <!-- <div class="col-12 col-sm-10 col-md-6 col-lg-4  offset-sm-1 offset-md-0 mb-3">
+                <div class="row m-1 Lead">
+                    <div class="col-12 text-center pt-3 pb-2 leadName">Lead Name
+                    </div>
+                     <small class="col-12 text-justify pb-2">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                     </small>
+                     <small class="col-12 pb-2">
+                         <span>Cost </span>
+                         <span class="pl-1"> : 500$</span>
+                     </small>
+                    <small class="col-12 pb-3">
+                        <span>From :</span>
+                        <span>rohan.gaikwad19@vit.edu</span>
+                    </small>
+
+                   <div class="col-6 mb-2">
+                       <div class="row pl-3 py-2 pr-2">
+                         <button class="btn btn-sm btn-danger  col-12">REJECT
+                         </button>
+                       </div>
+                   </div>
+                    <div class="col-6 mb-2">
+                        <div class="row pr-3 pl-1 py-2" >
+                         <button class="btn btn-sm btn-success  col-12">ACCEPT
+                         </button>
+                        </div>
+                    </div>
+                    
+                 </div>
+                </div>
+ 
+                <div class="col-12 col-sm-10 col-md-6 col-lg-4   offset-sm-1 offset-md-0 mb-3">
+                    <div class="row m-1 Lead">
+                        <div class="col-12 text-center pt-3 pb-2 leadName">Lead Name
+                        </div>
+                         <small class="col-12 text-justify pb-2">
+                                Lorem ipsum dolor sit amet consectetur adipisicing
+                         </small>
+                         <small class="col-12 pb-2">
+                             <span>Cost </span>
+                             <span class="pl-1"> : 500$</span>
+                         </small>
+                        <small class="col-12 pb-3">
+                            <span>From :</span>
+                            <span>rohan.gaikwad19@vit.edu</span>
+                        </small>
+    
+                       <div class="col-6 mb-2">
+                           <div class="row pl-3 py-2 pr-2">
+                             <button class="btn btn-sm btn-danger  col-12">REJECT
+                             </button>
+                           </div>
+                       </div>
+                        <div class="col-6 mb-2">
+                            <div class="row pr-3 pl-1 py-2" >
+                             <button class="btn btn-sm btn-success  col-12">ACCEPT
+                             </button>
+                            </div>
+                        </div>
+                        
+                     </div>
+                </div>end of 1st lead -->
+            </div>
+        </div>
+    </div>
+
+
+    <div class="filters px-5">
+        <div class="byDate by">
+            <i class="fas fa-arrow-up"></i>
+            <a href="/leads/open">Open</a>
+        </div>
+        <div class="byDate by">
+            <i class="fa fa-eye"></i>
+            <a href="/leads/closed">Closed</a>
+        </div>
+        <div class="byDate by">
+            <i class="fa fa-eye"></i>
+            <a href="/leads/validated">Validated</a>
+        </div>
+        <div class="byDate by">
+            <i class="fa fa-eye"></i>
+            <a href="/leads/rejected">Rejected</a>
+        </div>
+    </div>
+
+</body>
+<script src="../public/javascripts/leads.js"></script>
+
+</html>
