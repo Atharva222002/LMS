@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/stylesheets/login.css">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -37,8 +38,8 @@
 
             <div class="col-12   mt-3">
                <div class="row">
-                <input id="register" class="col-6 btn btn-secondary" value="REGISTER" onclick="window.location.href='/register'">
-                <input type="submit" class="col-6 btn btn-success" id="submit" value="LOGIN">
+                <input id="register" class="col-6 btn btn-primary" value="REGISTER" onclick="window.location.href='/register'">
+                <input type="submit" class="col-6 btn btn-danger" id="submit" value="LOGIN"  onclick="ValidateEmail(username)">
                </div>
             </div>
         </form><!--end of row-->
@@ -63,6 +64,24 @@
     
     var registerPassword = document.getElementById('registerPassword');
     var registerUser = document.getElementById('registerUser');
+
+    function ValidateEmail(inputText)
+{
+
+var mailformat = /.+@(opco1|opco2|opco3|opco4|opco5)\.com$/;
+if(inputText.value.match(mailformat))
+{
+// alert("You have entered a valid email address!");    
+document.username.focus();
+return true;
+}
+else
+{
+alert("You have entered an invalid email address!");    
+document.username.focus();
+return false;
+}
+}
 
     
     
