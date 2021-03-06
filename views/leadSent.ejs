@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="/stylesheets/leads.css">
+    <link rel="stylesheet" href="../stylesheets/leads.css">
     <title>Leads</title>
 </head>
 <body>
-    <div>
-        <script id="alert"></script>
-    </div>
     <div class="navigation pl-5">
         <div class="option">
             <i class="far fa-file-code"></i>
@@ -31,7 +28,7 @@
         </div>
     </div>
      
-    <div class="container-fluid leadsBox py-5">
+    <div class="container-fluid leadsBox py-5 " style="background-color:white;">
         <div class="container">
            <div class="row">
             <% allLeads.forEach(function(lead){ %>
@@ -40,21 +37,21 @@
                        <div class="col-12 text-center pt-3 pb-2 leadName">Lead Name
                        </div>
                        <small class="col-12 pb-2">
-                        <span>Name </span>
+                        <b><span>Name </span></b>
                         <span class="pl-1"> : <%=lead.name%></span>
                         </small>
                         <small class="col-12 pb-2">
-                            <span>Cost </span>
+                            <b><span>$ Value </span></b>
                             <span class="pl-1"> : <%=lead.value%></span>
                         </small>
                        <small class="col-12 pb-3">
-                           <span>To :</span>
+                           <b><span>To :</span></b>
                            <span><%=lead.Submitted_To%></span>
                        
                         </small>
                         <small class="col-12 pb-3">
-                            <span>Status :</span>
-                            <span><%=lead.curstatus%></span>
+                            <b><span>Status :</span></b>
+                            <span><%=lead.status%></span>
                         
                          </small>
 
@@ -70,5 +67,4 @@
 
 </body>
 <script src="../public/javascripts/leads.js"></script>
-<script src="/js/index2.js"></script>
 </html>
