@@ -1,4 +1,33 @@
 
+#example1 {
+  
+  padding: 10px;
+  box-shadow: 5px 10px 8px 10px #888888;
+  position:absolute;
+  top:20%;
+  left: 50%;
+   width: 40%;
+   height: 40%;
+   text-align: center;
+   background-color: #000;
+   opacity: 0.6;
+   color: #656565;
+   font-size: 2vw;
+  
+}
+ .heading{
+   color: #000;
+   text-shadow: 2px 2px #000;
+   position:absolute;
+   top:15%;
+   width: 10%;
+   right: 30%;
+   text-align: right;
+   font-size: 2vw;
+ 
+
+
+ }
 /* -------------------------------------NAVBAR---------------------------------- */
 .navbar {
     transition: all 0.4s;
@@ -19,7 +48,7 @@
 }
 
 
-/* Change navbar styling on scroll */
+
 .navbar.active {
     background: #fff;
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
@@ -40,7 +69,7 @@
 }
 
 
-/* Change navbar styling on small viewports */
+
 @media (max-width: 991.98px) {
     .navbar {
         background: #fff;
@@ -69,7 +98,7 @@
     height: 350px;
     margin-top: 0%;
     
-    /* 5px rounded corners */
+    
   }
   .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -84,15 +113,17 @@
   .inner:hover img{
     transform: scale(1.5);
   }
-/* body {
-    min-height: 110vh;
-    background-color: #4ca1af;
-    background-image: linear-gradient(135deg, #4ca1af 0%, #c4e0e5 100%);
-} */
-/* .abcd{
-    background-size: 100%;
-    height: 500px;
-} */
+
+  .icon{
+    color:#5bc0de;
+  
+  }
+  .icon:hover{
+    color: #8f8f8f;
+  }
+  .fas fa-check-square{
+    color: #8f8f8f;
+  }
 
 
 /* -----------------------------FOOTER----------------------------------------------------------- */
@@ -126,7 +157,7 @@ footer{
   margin-top: 15%;
   bottom: 0px;
   width: 100%;
-  background: #111;
+  background:rgb(82, 79, 79);
 }
 .main-content{
   display: flex;
@@ -157,7 +188,7 @@ footer{
   content: '';
   height: 2px;
   width: 15%;
-  background: #f12020;
+  background: #5bc0de;
   top: -10px;
 }
 .left .content p{
@@ -179,8 +210,27 @@ footer{
   border-radius: 5px;
   transition: 0.3s;
 }
-.left .content .social a span:hover{
-  background: #f12020;
+.center .content .social a span:hover{
+  background: #5bc0de;
+}
+.center .content .social{
+  margin: 20px 0 0 0;
+}
+.center .content .social a{
+  padding: 0 2px;
+}
+.center .content .social a span{
+  height: 40px;
+  width: 40px;
+  background: #1a1a1a;
+  line-height: 40px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.center .content .social a span:hover{
+  background: #5bc0de;
 }
 .center .content .fas{
   font-size: 1.4375rem;
@@ -194,7 +244,7 @@ footer{
   cursor: pointer;
 }
 .center .content .fas:hover{
-  background: #f12020;
+  background: #5bc0de;
 }
 .center .content .text{
   font-size: 1.0625rem;
@@ -234,7 +284,7 @@ footer{
   width: 100%;
   border: none;
   outline: none;
-  background: #f12020;
+  background: #5bc0de;
   font-size: 1.0625rem;
   font-weight: 500;
   cursor: pointer;
@@ -252,7 +302,7 @@ footer{
   color: #656565;
 }
 .bottom center a{
-  color: #f12020;
+  color: #5bc0de;
   text-decoration: none;
 }
 .bottom center a:hover{
@@ -272,5 +322,20 @@ footer{
   }
 }
 /* ------------------------------------------------------------------------------------------------------------------------------- */
-
- 
+.featured .leads i, .featured .leads h3 a, .featured .leads:hover p {
+  color: black;
+}
+.featured .leads:hover {
+  background:rgb(124, 120, 120);
+}
+.featured {
+  position: relative;
+  z-index: 2;
+}
+@media screen and (max-width : 400px)
+{
+  #example1
+  {
+    font:10rm;
+  }
+}
