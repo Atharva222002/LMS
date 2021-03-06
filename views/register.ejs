@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/stylesheets/login.css">
+    <link rel="stylesheet" href="../css/login.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -16,6 +16,24 @@
             <h4 class="col-12 pt-5 mb-4">
                 REGISTER <i class="ml-2 fa fa-sign-in"></i>
             </h4>
+
+            <div class="col-12 mb-3">  
+            <div class="dropdown">
+                <div class="row">
+                <label for="opco-select" style="color: rgba(90, 84, 84, 0.9); font-size: 17px;" class="col-5">Select your OpCo:</label>
+    
+                <select style="border-bottom: 2px solid rgba(171, 171, 171 , 0.90);" class="col-7" name="pets" id="opco-select">
+                    
+                    <option value="dog">OpCo1</option>
+                    <option value="cat">OpCo2</option>
+                    <option value="hamster">OpCo3</option>
+                    <option value="parrot">OpCo4</option>
+                    <option value="spider">OpCo5</option>
+                    <option value="goldfish">OpCo6</option>
+                </select>
+              </div> 
+            </div>  
+            </div>
         
             <div class="col-12 mb-3">
                 <input type="text" name="name" id="registerName" class="col-12" placeholder="Enter your name" required>
@@ -24,15 +42,10 @@
             <!-- <div class="col-12 mb-3">
                 <input type="text" name="OpCo" id="registerOpco" class="col-12" placeholder="Enter OpCo" required>
             </div> -->
-            <label for="opco">Choose a OpCo:</label>
-                <select name="OpCo" id="opco">
-                <option>OpCo1</option>
-                <option>OpCo2</option>
-                <option>OpCo3</option>
-                </select>
-        
+    
+
             <div class="col-12 mb-3">
-                <input type="email" name="username" id="email" class="col-12" placeholder="Enter Email Id" required>
+                <input type="email" name="username" id="email" class="col-12" placeholder="Enter Email Id"  size="30" required>
             </div>
         
             <div class="col-12 mb-3">
@@ -56,8 +69,8 @@
         
             <div class="col-12   mt-5">
                 <div class="row">
-                    <input class="col-6 btn btn-secondary" value="LOGIN" id="login" onclick="window.location.href='/login'">
-                    <input type="submit" class="col-6 btn btn-success" id="registerUser" value="REGISTER" onclick="submit">
+                    <input class="col-6 btn btn-primary" value="LOGIN" id="login" onclick="window.location.href='/login'">
+                    <input type="submit" class="col-6 btn btn-danger" id="registerUser" value="REGISTER" onclick="ValidateEmail(username);submit">
                 </div>
             </div> 
         </form>
@@ -82,6 +95,25 @@
     
     var registerPassword = document.getElementById('registerPassword');
     var registerUser = document.getElementById('registerUser');
+
+    function ValidateEmail(inputText)
+{
+
+var mailformat = /.+@(opco1|opco2|opco3|opco4|opco5)\.com$/;
+if(inputText.value.match(mailformat))
+{
+// alert("You have entered a valid email address!");    
+document.username.focus();
+return true;
+}
+else
+{
+alert("You have entered an invalid email address!");    
+document.username.focus();
+return false;
+}
+}
+
     
     function submit() {
         loginBox.style.display = 'none';
@@ -140,5 +172,7 @@
        if(password.length < 6 || (!(password.match(/[0-9]+/))) || !(password.match(/[a-z]+/) && password.match(/[A-Z]+/))) {
            event.preventDefault();
        }
-    })</script> -->
+    })
+   
+    </script> -->
 </html>
