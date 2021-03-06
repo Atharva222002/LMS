@@ -282,6 +282,44 @@ app.post("/leads/:id/close",middleware.isLoggedIn, function(req, res){
   })
 });
 
+
+
+app.get('/chart' ,(req,res)=>{
+  res.render('chart');
+})
+
+app.get("/api/data" ,async (req ,res)=>{
+  console.log("Api called");
+  var open = await lead.find({curstatus:"open"})
+  var closed = await lead.find({curstatus:"close"})
+  var validated = await lead.find({curstatus:"validated"})
+  var rejected = await  lead.find({curstatus:"rejected"})
+  if(open.length !== undefined && closed.length !== undefined &&validated.length !== undefined && rejected.length !== undefined ){
+    res.send({open : open.length , closed : closed.length , validated : validated.length , rejected : rejected.length});
+  }
+})
+
+app.get('/api/barData', async (req,res)=>{ 
+  
+  var allRecords = [];
+  var allSegments = await lead.find({},{segment : 1});
+  allSegments.forEach((s)=>{
+    var LeadsinSegment =   lead.find({segment : s.segment}, (error,data)=>{
+      if(error)
+      console.log(error)
+      console.log(data.length + " " + s.segment); 
+      allRecords.push(  s.segment )
+      allRecords.push(  data.length );
+    })
+  })  
+  setTimeout(()=>{
+    console.log(allRecords.length);
+  
+    res.send(allRecords)
+  },2000)
+})
+
+
 http.listen(process.env.PORT || 80, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
   })
