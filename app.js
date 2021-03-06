@@ -15,6 +15,7 @@ var express      = require("express"),
       middleware = require("./middleware");
       const mongodb = require("mongodb").MongoClient;
 const fastcsv = require("fast-csv");
+const objectstocsv = require('objects-to-csv')
 const fs = require("fs");
 const mongooseToCsv = require('mongoose-to-csv');
 
@@ -159,15 +160,27 @@ app.get("/form",middlewareObj.isLoggedIn,function(req,res){
   console.log(req.user)
   res.render("form",{username:req.user.username});
 });
-
+const data = [ 
+  {to: 'prapti@opco1.com', from: 'juhi@opco2.com', status: 'Validated'},
+  {to: 'rohan@opco1.com', from: 'atharva@opco2.com', status: 'Closed'},
+  {to: 'abc@opco1.com', from: 'xyz@opco2.com', status: 'Validated'}
+]
 app.get("/home/csv",middlewareObj.isLoggedIn,async function(req,res){
-  var list = await lead.find({Submitted_By:req.user.username})
-  var list1= await lead.find({Submitted_To:req.user.username})
+  const query = lead.find({Submitted_By:req.user.username},{_id:0,Submitted_By:1,Submitted_To:1,curstatus:1})
+  let list = await query.lean().exec();
+  const query1 = lead.find({Submitted_To:req.user.username},{_id:0,Submitted_By:1,Submitted_To:1,curstatus:1})
+  let list1 = await query1.lean().exec();
   var list2=list.concat(list1)
-  console.log(list2)
-  Lead.csvReadStream(list2)
-  .pipe(fs.createWriteStream('leads.csv'));
-  res.redirect("/home")
+  const csv = new objectstocsv(list2);
+  // Save to file:
+
+  setTimeout(async()=>{
+    await csv.toDisk('./details.csv');
+    res.download("./details.csv", () => {
+    fs.unlinkSync("./details.csv")
+    })
+  },4000);
+
 });
 
 
@@ -193,6 +206,21 @@ io.on('connection', (socket) => {
      }
   });
 });
+
+app.get('/chart' ,(req,res)=>{
+  res.render('chart');
+})
+
+app.get("/api/data" ,async (req ,res)=>{
+  console.log("Api called");
+  var open = await lead.find({curstatus:"open"})
+  var closed = await lead.find({curstatus:"close"})
+  var validated = await lead.find({curstatus:"validated"})
+  var rejected = await  lead.find({curstatus:"rejected"})
+  if(open.length !== undefined && closed.length !== undefined &&validated.length !== undefined && rejected.length !== undefined ){
+    res.send({open : open.length , closed : closed.length , validated : validated.length , rejected : rejected.length});
+  }
+})
 
 app.get("/leads/open",middlewareObj.isLoggedIn,async function(req,res){
   var allLeads= await lead.find({Submitted_To:req.user.username})
