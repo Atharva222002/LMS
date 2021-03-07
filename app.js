@@ -6,22 +6,29 @@ var express      = require("express"),
       bodyParser = require("body-parser"),
   methodOverride = require("method-override"),
   passport       = require("passport"),
+  bcryptjs = require('bcryptjs')
   LocalStrategy  = require("passport-local"),
         // seedDB   = require("./seeds"),
         OpCo1 = require("./models/opco1");
         OpCo2 = require("./models/opco2");
         OpCo3 = require("./models/opco3");
-            Lead = require("./models/lead"),
-      middleware = require("./middleware");
+            Lead = require("./models/lead");
+          checkLogin=  require("./middleware/checkLogin")
       const mongodb = require("mongodb").MongoClient;
 const fastcsv = require("fast-csv");
 const objectstocsv = require('objects-to-csv')
 const fs = require("fs");
 const mongooseToCsv = require('mongoose-to-csv');
+var tokenGneration = require('./modules/generateToken');
+
+
+if (typeof localStorage === "undefined" || localStorage === null) {
+    var LocalStorage = require("node-localstorage").LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+}
 
 const company1=require("./models/opco1");
 
-const middlewareObj = require("./middleware");
 const opco1 = require("./models/opco1");
 const { all } = require("./routes/indexRoutes");
  var indexRoutes = require("./routes/indexRoutes");       
@@ -50,17 +57,12 @@ app.use(passport.session());
 
 app.use(express.static(__dirname + "public"));
 
-app.use(function(req, res, next){
-    res.locals.currentUser = req.user;
-    next();
-  });
-
 app.use("/",indexRoutes);
 
 
 // // SIGN UP LOGIC
-app.post("/register", function(req,res){
-  const {name,OpCo,username,psw} = req.body;
+app.post("/register",async function(req,res){
+  const {name,OpCo,username,password} = req.body;
   var findVar={
     opcom1:"OpCo1",
     opcom2:"OpCo2",
@@ -77,20 +79,32 @@ app.post("/register", function(req,res){
         break
     }
 }
-  var newUser = new model({name:name,OpCo:OpCo,username:username,password:psw});
-    model.register(newUser, req.body.password, function(err,user){
-      if (err) {
-        console.log(err.message)
-        return res.render("register");  
-      } 
-        passport.authenticate("local")(req,res,function(){
-        res.redirect("/home");
-        })
-    });
+try {
+  const user = await model.create({ "name" : name, "OpCo" : OpCo , "username" : username, "password" : password});
+  var token = tokenGneration(user._id);
+  res.cookie('jwt', token, { httpOnly: true  });
+  res.redirect("/home");
+}
+catch(err) {
+  console.log(err)
+  res.send("Invalid Data")
+}
+
+  // var newUser = new model({name:name,OpCo:OpCo,username:username,password:psw});
+  //   model.register(newUser, req.body.password, function(err,user){
+  //     if (err) {
+  //       console.log(err.message)
+  //       return res.render("register");  
+  //     } 
+  //     console.log(model)
+  //       passport.authenticate("local")(req,res,function(){
+  //       res.redirect("/home");
+  //       })
+  //   });
 });
 
 // HANDLING  LOGIN LOGIC
-app.post('/login', (req, res, next) => {
+app.post('/login',async (req, res, next) => {
   var model=opco1
   var findVar={
     opcom1:"opco1",
@@ -107,68 +121,53 @@ app.post('/login', (req, res, next) => {
     if (username.includes(findVar[key])) {
         model=findOpCo[key]
         break}}
-  passport.use(new LocalStrategy(model.authenticate()));
-  passport.serializeUser(model.serializeUser());
-passport.deserializeUser(model.deserializeUser());
-  passport.authenticate('local',
-  (err, user, info) => {
-    if (err) {
-      return next(err);
-    }
+        
 
-    if (!user) {
-      return res.redirect("/login");
-    }
-
-    req.logIn(user, function(err) {
-      if (err) {
-        return next(err);
+        try {
+          const user = await model.login(username, req.body.password);
+          var token = tokenGneration(user._id);
+          localStorage.setItem('EMAIL' , username);
+          res.cookie('jwt', token, { httpOnly: true  }); 
+          //res.status(200).json({ user: user._id });
+          res.redirect("/home")
+      } catch (err) {
+          //res.status(400).json({msg:"Invalid credentials"});
+          res.send(' Invalid Credentials ')
       }
-
-      return res.redirect('/home');
-    });
-
-  })(req, res, next);
 });
 
 var getUser
-
-app.get("/home",middlewareObj.isLoggedIn,function(req,res){
-  getUser=req.user.username
+app.get("/home",checkLogin,function(req,res){
+  getUser=localStorage.getItem("EMAIL")
   res.render("home")
 })
 
-// app.post("/form",middlewareObj.isLoggedIn, function(req,res){
+// app.post("/form",checkLogin, function(req,res){
 //   const {name,value,segment,to} = req.body;
-//   var newLead = new Lead({name:name,time:new Date(),status:"open",value:value,segment:segment,Submitted_By:req.user.username,Submitted_To:to});
+//   var newLead = new Lead({name:name,time:new Date(),status:"open",value:value,segment:segment,Submitted_By:localStorage.getItem("EMAIL"),Submitted_To:to});
 //   newLead.save()
 //   console.log("Lead Generated")
 //   res.redirect(`/home`)
 // });
 
-app.get("/leads",middlewareObj.isLoggedIn,async function(req,res){
-  var allLeads= await lead.find({Submitted_To:req.user.username})
+app.get("/leads",checkLogin,async function(req,res){
+  var allLeads= await lead.find({Submitted_To:localStorage.getItem("EMAIL")})
   res.render("leads",{allLeads:allLeads});
 });
 
-app.get("/leadSent",middlewareObj.isLoggedIn,async function(req,res){
-  var allLeads= await lead.find({Submitted_By:req.user.username})
+app.get("/leadSent",checkLogin,async function(req,res){
+  var allLeads= await lead.find({Submitted_By:localStorage.getItem("EMAIL")})
   res.render("leadSent",{allLeads:allLeads});
 });
 
-app.get("/form",middlewareObj.isLoggedIn,function(req,res){
-  console.log(req.user)
-  res.render("form",{username:req.user.username});
+app.get("/form",checkLogin,function(req,res){
+  res.render("form",{username:localStorage.getItem("EMAIL")});
 });
-const data = [ 
-  {to: 'prapti@opco1.com', from: 'juhi@opco2.com', status: 'Validated'},
-  {to: 'rohan@opco1.com', from: 'atharva@opco2.com', status: 'Closed'},
-  {to: 'abc@opco1.com', from: 'xyz@opco2.com', status: 'Validated'}
-]
-app.get("/home/csv",middlewareObj.isLoggedIn,async function(req,res){
-  const query = lead.find({Submitted_By:req.user.username},{_id:0,Submitted_By:1,Submitted_To:1,curstatus:1})
+
+app.get("/home/csv",checkLogin,async function(req,res){
+  const query = lead.find({Submitted_By:localStorage.getItem("EMAIL")},{_id:0,Submitted_By:1,Submitted_To:1,curstatus:1})
   let list = await query.lean().exec();
-  const query1 = lead.find({Submitted_To:req.user.username},{_id:0,Submitted_By:1,Submitted_To:1,curstatus:1})
+  const query1 = lead.find({Submitted_To:localStorage.getItem("EMAIL")},{_id:0,Submitted_By:1,Submitted_To:1,curstatus:1})
   let list1 = await query1.lean().exec();
   var list2=list.concat(list1)
   const csv = new objectstocsv(list2);
@@ -185,11 +184,11 @@ app.get("/home/csv",middlewareObj.isLoggedIn,async function(req,res){
 
 
 var allUsers = new  Map;
+console.log(allUsers)
 io.on('connection', (socket) => {
   allUsers.set(getUser, socket.id);
   socket.on('LeadSent', (leadobj) => {
     console.log(allUsers)
-     console.log("Someone sent Lead : " + leadobj.data);
      var newLead = new Lead({name:leadobj.name,status:{label:"open",time:new Date()},curstatus:"open",value:leadobj.value,segment:leadobj.segment,Submitted_By:leadobj.from,Submitted_To:leadobj.to});
      newLead.save()
      console.log("Lead Generated")
@@ -222,28 +221,28 @@ app.get("/api/data" ,async (req ,res)=>{
   }
 })
 
-app.get("/leads/open",middlewareObj.isLoggedIn,async function(req,res){
-  var allLeads= await lead.find({Submitted_To:req.user.username})
+app.get("/leads/open",checkLogin,async function(req,res){
+  var allLeads= await lead.find({Submitted_To:localStorage.getItem("EMAIL")})
   var openLeads=allLeads.filter(x => x.curstatus==="open")
   res.render("leads",{allLeads:openLeads});
 });
-app.get("/leads/closed",middlewareObj.isLoggedIn,async function(req,res){
-  var allLeads= await lead.find({Submitted_To:req.user.username})
+app.get("/leads/closed",checkLogin,async function(req,res){
+  var allLeads= await lead.find({Submitted_To:localStorage.getItem("EMAIL")})
   var closeLeads=allLeads.filter(x => x.curstatus==="close")
   res.render("leads",{allLeads:closeLeads});
 });
-app.get("/leads/validated",middlewareObj.isLoggedIn,async function(req,res){
-  var allLeads= await lead.find({Submitted_To:req.user.username})
+app.get("/leads/validated",checkLogin,async function(req,res){
+  var allLeads= await lead.find({Submitted_To:localStorage.getItem("EMAIL")})
   var validatedLeads=allLeads.filter(x => x.curstatus==="validated")
   res.render("leads",{allLeads:validatedLeads});
 });
-app.get("/leads/rejected",middlewareObj.isLoggedIn,async function(req,res){
-  var allLeads= await lead.find({Submitted_To:req.user.username})
+app.get("/leads/rejected",checkLogin,async function(req,res){
+  var allLeads= await lead.find({Submitted_To:localStorage.getItem("EMAIL")})
   var rejectedLeads=allLeads.filter(x => x.curstatus==="rejected")
   res.render("leads",{allLeads:rejectedLeads});
 });
 
-app.post("/leads/:id/reject",middleware.isLoggedIn, function(req, res){
+app.post("/leads/:id/reject",checkLogin, function(req, res){
   Lead.findById(req.params.id, function(err,user){
       if (err) {
           res.redirect("/leads");
@@ -256,7 +255,7 @@ app.post("/leads/:id/reject",middleware.isLoggedIn, function(req, res){
   })
 });
 
-app.post("/leads/:id/accept",middleware.isLoggedIn, function(req, res){
+app.post("/leads/:id/accept",checkLogin, function(req, res){
   Lead.findById(req.params.id, function(err,user){
       if (err) {
           res.redirect("/leads");
@@ -269,7 +268,7 @@ app.post("/leads/:id/accept",middleware.isLoggedIn, function(req, res){
   })
 });
 
-app.post("/leads/:id/close",middleware.isLoggedIn, function(req, res){
+app.post("/leads/:id/close",checkLogin, function(req, res){
   Lead.findById(req.params.id, function(err,user){
       if (err) {
           res.redirect("/leads");
@@ -316,7 +315,6 @@ app.get('/api/barData', async (req,res)=>{
 app.get('/chart1' ,(req,res)=>{
   res.render('chart1');
 })
-
 
 http.listen(process.env.PORT || 80, function(){
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
