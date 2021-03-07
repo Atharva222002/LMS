@@ -282,12 +282,6 @@ app.post("/leads/:id/close",middleware.isLoggedIn, function(req, res){
   })
 });
 
-
-
-app.get('/chart' ,(req,res)=>{
-  res.render('chart');
-})
-
 app.get("/api/data" ,async (req ,res)=>{
   console.log("Api called");
   var open = await lead.find({curstatus:"open"})
@@ -316,7 +310,11 @@ app.get('/api/barData', async (req,res)=>{
     console.log(allRecords.length);
   
     res.send(allRecords)
-  },2000)
+  },2500)
+})
+ 
+app.get('/chart1' ,(req,res)=>{
+  res.render('chart1');
 })
 
 
