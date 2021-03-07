@@ -157,7 +157,7 @@ footer{
   margin-top: 15%;
   bottom: 0px;
   width: 100%;
-  background:rgb(82, 79, 79);
+  background:#111;
 }
 .main-content{
   display: flex;
