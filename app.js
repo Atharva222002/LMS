@@ -159,7 +159,7 @@ app.get("/leads",checkLogin,async function(req,res){
 
 app.get("/leadSent",checkLogin,async function(req,res){
   var allLeads= await lead.find({Submitted_By:localStorage.getItem("EMAIL")})
-  console.log(allLeads)
+  console.log(allLeads,localStorage.getItem("EMAIL"))
   res.render("leadSent",{allLeads:allLeads});
 });
 
@@ -187,14 +187,15 @@ app.get("/home/csv",checkLogin,async function(req,res){
 
 
 app.post("/form",(req,res)=>{
-  var newLead = new Lead({name:req.body.name,status:{label:"open",time:new Date()},curstatus:"open",value:req.body.value,segment:req.body.segment,Submitted_By:req.body.from,Submitted_To:req.body.to});
+  console.log(req.body)
+  var newLead = new Lead({name:req.body.name,status:{label:"open",time:new Date()},curstatus:"open",value:req.body.dollar,details:req.body.value,segment:req.body.segment,Submitted_By:req.body.from,Submitted_To:req.body.to});
   newLead.save()
   console.log("Lead Generated")
   res.render("msg",{msg:"Lead send successfully"})
 });
 
 app.get('/chart' ,(req,res)=>{
-  res.render('chart');
+  res.render('chart1');
 })
 
 app.get("/api/data" ,async (req ,res)=>{
