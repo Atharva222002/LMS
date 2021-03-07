@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/stylesheets/form.css">
+    <title>Leads</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <link rel="stylesheet" href="/stylesheets/form.css">
+</head>
+<body>
+    <div>
+        <script id="alert"></script>
+    </div>
+    <div class="navigation pl-5">
+        <div class="option">
+            <i class="far fa-file-code"></i>
+            <a href="/leads"><small>Leads Received</small></a>
+        </div>
+        <div class="option">
+            <i class="fas fa-plane"></i>
+            <a href="/leadSent"><small>Leads Sent</small></a>
+        </div>
+        <div class="option">
+            <i class="fas fa-plus"></i>
+            <a href="/form"><small>Add Lead</small></a>
+        </div>
+        <div class="option">
+            <i class="fas fa-sign-out-alt"></i>
+            <a href="/logout"><small>Logout</small></a>
+        </div>
+    </div>
+     
+    <div class="box pb-2 pt-5 pl-5 pr-5" style="background-color: rgb(205, 227, 255);">
+        <div class="container-fluid">
+            <div>
+                <h4 class="col-12 pt-3 mb-5 ml-0">
+                    ADD LEAD
+                </h4>
+            </div>
+    <form class="row g-2" action="/form" method="POST">
+        <div class="col-12">
+            <input type="text" class="form-control" name="name" id="name" placeholder="Enter Customer Name">
+        </div>
+
+        <div class="col-12 pt-4">
+          <input type="text" class="form-control" name="value" id="value" placeholder="Enter Project details">
+        </div>
+      
+        <div class="col-12 pt-4">
+            <input type="text" class="form-control" name="from" id="from" value="<%=username%>" placeholder="Lead sent by(enter email id)">
+        </div>
+
+        <div class="col-12 pt-4">
+            <input type="text" class="form-control" name="to" id="to" placeholder="Lead sent to(enter email id)">
+        </div>
+
+<<<<<<< HEAD
+        <!-- <div class="col-md-6 pt-4">
+            <input type="number" class="form-control" id="value" name="value" placeholder="Enter $-value of the Lead">
+        </div> -->
+=======
+        <div class="col-md-6 pt-4">
+            <input type="number" class="form-control" id="dollar" name="dollar" placeholder="Enter $-value of the Lead">
+        </div>
+>>>>>>> 5c40d03e3ebed45f5a5aae028105e1795ae9d021
+    
+
+        <div class="col-md-4 pt-4">  
+            <div class="dropdown">
+               <select style="border-radius: 3px; border-color: rgb(199, 196, 196);" class="col-12 pt-2 pb-1" name="segment" id="segment">
+                    <option selected>Choose segment</option>
+                    <option value="seg1">Seg1</option>
+                    <option value="seg2">Seg2</option>
+                    <option value="seg3">Seg3</option>
+                    <option value="seg4">Seg4</option>
+                    <option value="seg5">Seg5</option>
+                    <option value="seg6">Seg6</option>
+                </select>
+            </div>  
+        </div>
+        
+        <div class="col-12 pt-4 mb-4">
+          <button type="submit" class="btn btn-secondary">Send Lead</button>
+        </div>
+      </form>
+    </div>
+    </div>
+    
+    <!-- <div class="box mb-4">
+        <div class="container-fluid">
+            <form class="row">
+                 <h4 class="col-12 pt-5 mb-5">
+                    ADD LEAD 
+                 </h4>
+                 
+                 <div class="col-12   mb-4">
+                     <input type="text" name="name" id="name" class="col-12" placeholder="Enter Customer name">
+                 </div>
+    
+                 <div class="col-12   mb-4">
+                    <input type="text" name="value" id="value"
+                    class="col-12" placeholder="Enter project details(including $ value of the lead)">
+                </div>
+
+                <div class="col-12   mb-4">
+                    <input type="text" name="segment" id="segment"
+                    class="col-12" placeholder="Enter Segment details">
+                </div>
+                
+                <div class="col-12   mb-4">
+                    <input type="text" name="from" id="from"
+                    class="col-12" value="<%=username%>" disabled placeholder="Lead send from(email id)">
+                </div>
+
+                <div class="col-12   mb-4">
+                    <input type="text" name="to" id="to"
+                    class="col-12" placeholder="Lead submitted to(email id)">
+                </div>
+    
+              
+               <button type="submit" id="send" style="padding-bottom: 3px; margin-top: 2%;" class="btn btn-primary active mb-4" data-bs-toggle="button" autocomplete="off" aria-pressed="true">ADD LEAD</button>
+            <div id="receive">
+
+            </div>
+                   
+            </form> -->
+        <!-- </div>
+       </div>  -->
+    
+
+
+</body>
+<script src="/js/index2.js"></script>
+<script src="/javascripts/leads.js"></script>
+</html>

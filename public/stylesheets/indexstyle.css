@@ -1,0 +1,341 @@
+
+#example1 {
+  
+  padding: 10px;
+  box-shadow: 5px 10px 8px 10px #888888;
+  position:absolute;
+  top:20%;
+  left: 50%;
+   width: 40%;
+   height: 40%;
+   text-align: center;
+   background-color: #000;
+   opacity: 0.6;
+   color: #656565;
+   font-size: 2vw;
+  
+}
+ .heading{
+   color: #000;
+   text-shadow: 2px 2px #000;
+   position:absolute;
+   top:15%;
+   width: 10%;
+   right: 30%;
+   text-align: right;
+   font-size: 2vw;
+ 
+
+
+ }
+/* -------------------------------------NAVBAR---------------------------------- */
+.navbar {
+    transition: all 0.4s;
+}
+
+.navbar .nav-link {
+    color: #fff;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar .navbar-brand {
+    color: #fff;
+}
+
+
+
+.navbar.active {
+    background: #fff;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.active .nav-link {
+    color: #555;
+}
+
+.navbar.active .nav-link:hover,
+.navbar.active .nav-link:focus {
+    color: #555;
+    text-decoration: none;
+}
+
+.navbar.active .navbar-brand {
+    color: #555;
+}
+
+
+
+@media (max-width: 991.98px) {
+    .navbar {
+        background: #fff;
+    }
+
+    .navbar .navbar-brand, .navbar .nav-link {
+        color: #555;
+    }
+}
+
+
+
+
+.text-small {
+    font-size: 0.9rem !important;
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------------- */
+
+
+/* --------------------------------------------CARDS-------------------------------------------------------------------------- */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 15px; 
+    height: 350px;
+    margin-top: 0%;
+    
+    
+  }
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  .inner{
+    overflow: hidden;
+  }
+  .inner img{
+    transition: all 1.5s ease;
+  }
+  .inner:hover img{
+    transform: scale(1.5);
+  }
+
+  .icon{
+    color:#5bc0de;
+  
+  }
+  .icon:hover{
+    color: #8f8f8f;
+  }
+  .fas fa-check-square{
+    color: #8f8f8f;
+  }
+
+
+/* -----------------------------FOOTER----------------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  color: #d9d9d9;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.content1{
+  position: relative;
+  margin: 130px auto;
+  text-align: center;
+  padding: 0 20px;
+}
+.content1 .text{
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #202020;
+}
+.content1 .p{
+  font-size: 2.1875rem;
+  font-weight: 600;
+  color: #202020;
+}
+footer{
+  /* position: fixed; */
+  margin-top: 15%;
+  bottom: 0px;
+  width: 100%;
+  background:#111;
+}
+.main-content{
+  display: flex;
+}
+.main-content .box{
+  flex-basis: 50%;
+  padding: 10px 20px;
+}
+.box h2{
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.box .content{
+  margin: 20px 0 0 0;
+  position: relative;
+}
+.box .content:before{
+  position: absolute;
+  content: '';
+  top: -10px;
+  height: 2px;
+  width: 100%;
+  background: #1a1a1a;
+}
+.box .content:after{
+  position: absolute;
+  content: '';
+  height: 2px;
+  width: 15%;
+  background: #5bc0de;
+  top: -10px;
+}
+.left .content p{
+  text-align: justify;
+}
+.left .content .social{
+  margin: 20px 0 0 0;
+}
+.left .content .social a{
+  padding: 0 2px;
+}
+.left .content .social a span{
+  height: 40px;
+  width: 40px;
+  background: #1a1a1a;
+  line-height: 40px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.center .content .social a span:hover{
+  background: #5bc0de;
+}
+.center .content .social{
+  margin: 20px 0 0 0;
+}
+.center .content .social a{
+  padding: 0 2px;
+}
+.center .content .social a span{
+  height: 40px;
+  width: 40px;
+  background: #1a1a1a;
+  line-height: 40px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.center .content .social a span:hover{
+  background: #5bc0de;
+}
+.center .content .fas{
+  font-size: 1.4375rem;
+  background: #1a1a1a;
+  height: 45px;
+  width: 45px;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 50%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.center .content .fas:hover{
+  background: #5bc0de;
+}
+.center .content .text{
+  font-size: 1.0625rem;
+  font-weight: 500;
+  padding-left: 10px;
+}
+.center .content .phone{
+  margin: 15px 0;
+}
+.right form .text{
+  font-size: 1.0625rem;
+  margin-bottom: 2px;
+  color: #656565;
+}
+.right form .msg{
+  margin-top: 10px;
+}
+.right form input, .right form .msgForm{
+  width: 100%;
+  font-size: 1.0625rem;
+  background: #151515;
+  padding-left: 10px;
+  border: 1px solid #222222;
+}
+.right form input:focus,
+.right form .msgForm:focus{
+  outline-color: #3498db;
+}
+.right form input{
+  height: 35px;
+}
+.right form .btn{
+  margin-top: 10px;
+}
+.right form .btn button{
+  height: 40px;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: #5bc0de;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: .3s;
+}
+.right form .btn button:hover{
+  background: #000;
+}
+.bottom center{
+  padding: 5px;
+  font-size: 0.9375rem;
+  background: #151515;
+}
+.bottom center span{
+  color: #656565;
+}
+.bottom center a{
+  color: #5bc0de;
+  text-decoration: none;
+}
+.bottom center a:hover{
+  text-decoration: underline;
+}
+@media screen and (max-width: 900px) {
+  footer{
+    position: relative;
+    bottom: 0px;
+  }
+  .main-content{
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .main-content .box{
+    margin: 5px 0;
+  }
+}
+/* ------------------------------------------------------------------------------------------------------------------------------- */
+.featured .leads i, .featured .leads h3 a, .featured .leads:hover p {
+  color: black;
+}
+.featured .leads:hover {
+  background:rgb(201, 194, 194);
+}
+.featured {
+  position: relative;
+  z-index: 2;
+}
+@media screen and (max-width : 400px)
+{
+  #example1
+  {
+    font:10rm;
+  }
+}

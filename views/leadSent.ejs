@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/stylesheets/leads.css">
+    <title>Leads</title>
+</head>
+<body>
+    <div class="navigation pl-5">
+        <div class="option">
+            <i class="far fa-file-code"></i>
+            <a href="/leads"><small>Leads Received</small></a>
+        </div>
+        <div class="option">
+            <i class="fas fa-plane"></i>
+            <a href="/leadSent"><small>Leads Sent</small></a>
+        </div>
+        <div class="option">
+            <i class="fas fa-plus"></i>
+            <a href="/form"><small>Add Lead</small></a>
+        </div>
+        <div class="option">
+            <i class="fas fa-sign-out-alt"></i>
+            <a href="/logout"><small>Logout</small></a>
+        </div>
+    </div>
+     
+    <div class="container-fluid leadsBox py-5 " style="background-color:white;">
+        <div class="container">
+           <div class="row">
+            <% allLeads.forEach(function(lead){ %>
+               <div class="col-12 col-sm-10 col-md-6 col-lg-4   offset-sm-1 offset-md-0 mb-3"><!--start of 1st lead-->
+                   <div class="row m-1 Lead">
+                       <div class="col-12 text-center pt-3 pb-2 leadName">Lead Name
+                       </div>
+                       <small class="col-12 pb-2">
+                        <b><span>Name </span></b>
+                        <span class="pl-1"> : <%=lead.name%></span>
+                        </small>
+                        <small class="col-12 pb-2">
+                            <b><span>$ Value </span></b>
+                            <span class="pl-1"> : <%=lead.value%></span>
+                        </small>
+                       <small class="col-12 pb-3">
+                           <b><span>To :</span></b>
+                           <span><%=lead.Submitted_To%></span>
+                       
+                        </small>
+                        <small class="col-12 pb-3">
+                            <b><span>Status :</span></b>
+                            <span><%=lead.curstatus%></span>
+                        
+                         </small>
+
+                       
+                       
+                    </div>
+               </div><!--end of 1st lead-->
+                <%})%>
+           </div>
+        </div>
+    </div>
+ 
+
+</body>
+<script src="../public/javascripts/leads.js"></script>
+</html>

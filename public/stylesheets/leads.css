@@ -1,0 +1,160 @@
+.navigation{
+    height: 160px;
+    width: 100%;
+    background: rgb(50, 50, 50);
+    display: flex;
+    flex-wrap: nowrap;
+} 
+
+
+.option{
+    background: linear-gradient(rgba(255, 255, 255,0.12335),rgba(255, 255, 255, 0.12335));
+    height: 100px;
+    width: 140px;
+    display: inline-block;
+    margin: 30px 30px 0px 0px;
+    border-radius: 5px ;
+}
+
+.option:hover, .option:focus{
+    background: linear-gradient(rgba(255,255,255,0.2),rgba(255,255,255,0.2));
+    border-radius: 11px;
+    transform: scaleX(1.071);
+    transform: scaleY(1.064);
+    transition: 0.2s linear;
+    border: 1px solid white;
+}
+
+.option i{
+    color: rgb(255, 255, 255);
+    font-size: 35px;
+    display: block ;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.option a{
+    text-decoration: none;
+    font-size: large;
+    color: aliceblue;
+    display: block ;
+    text-align: center;
+    font-weight: 500;
+    font-size: 19px;
+    margin-top: 12px;
+}
+
+
+.leadsBox{
+    /* background: linear-gradient(rgba(221, 221, 221, 0.85),rgba(221, 221, 221, 0.85)); */
+    min-height: calc(100vh - 160px);
+    z-index: -1;
+    color: black;
+    border-radius: 2px;
+}
+
+
+.Lead{
+    background-color: rgba(155, 223, 255, 0.994);
+    z-index: -1;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+}
+
+.Lead button{
+    opacity: 0.7;
+    font-size: small;
+    font-weight: 300;   
+}
+
+.Lead button:hover{
+    opacity: 1;
+    font-weight: 650;
+    font-size: smaller;
+    transition: 0.25s linear;
+}
+
+.Lead:hover , .Lead:focus , .Leada:active{
+    box-shadow: 3px 3px 3px rgba(0,0,0,1) ;
+    z-index: 1;
+    border-radius: 7.5px;
+    transform: scale(1.03476,1.03476);
+    transition: 0.25s linear;
+}
+
+.Lead small{
+    font-size: 14.5px;
+}
+
+.Lead .leadName{
+    font-weight: 500;
+    font-size: 16.5px;
+}
+
+.filters{
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    color: white;
+    height: 70px;
+    background: white;
+    margin-bottom: 2%;
+    margin-left: 60%;
+}
+
+
+.by{
+    display: inline-block;
+    height: 51px;
+    width: 115px;
+    background:  linear-gradient(rgba(198, 212, 230, 0.994), rgba(127, 173, 233, 0.994));
+    margin: 9px;
+    padding: 7px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+
+.by i , .by span{
+    color: rgb(255, 255, 255);
+    display: block ;
+    text-align: center;
+    margin-top: 0px;
+    font-weight: 450;
+}
+
+
+.by:hover , .by:active , .by:focus{
+    transform: scale(1.081,1.081);
+    border: 1px solid rgb(255, 255, 255);
+    transition: 0.2s linear;
+
+}
+
+a {
+    color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
