@@ -1,14 +1,14 @@
 .navigation{
     height: 160px;
     width: 100%;
-    background: rgb(102, 98, 98);
+    background: rgb(50, 50, 50);
     display: flex;
     flex-wrap: nowrap;
 } 
 
 
 .option{
-    background: linear-gradient(rgb(172, 167, 167),rgb(128, 124, 124));
+    background: linear-gradient(rgba(255, 255, 255,0.12335),rgba(255, 255, 255, 0.12335));
     height: 100px;
     width: 140px;
     display: inline-block;
@@ -55,7 +55,7 @@
 
 
 .Lead{
-    background-color: rgba(201, 236, 252, 0.994);
+    background-color: rgba(155, 223, 255, 0.994);
     z-index: -1;
     border: none;
     outline: none;
@@ -102,7 +102,7 @@
     height: 70px;
     background: white;
     margin-bottom: 2%;
-   
+    margin-left: 60%;
 }
 
 
@@ -137,11 +137,6 @@
 a {
     color: black;
 }
-
-
-
-
-
 
 
 
