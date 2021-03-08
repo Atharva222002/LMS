@@ -83,6 +83,7 @@ app.post("/register",async function(req,res){
 try {
   const user = await model.create({ "name" : name, "OpCo" : OpCo , "username" : username, "password" : password});
   var token = tokenGneration(user._id);
+  localStorage.setItem('EMAIL' , username);
   res.cookie('jwt', token, { httpOnly: true  });
   res.redirect("/home");
 }
