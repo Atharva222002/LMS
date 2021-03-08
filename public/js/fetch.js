@@ -97,7 +97,7 @@ temp.addEventListener('click', () => {
             labels:labels,
             datasets: [
               {
-                label: "Segments Vs Number of Leads",
+                label: "Segment of Lead",
                 data: No_of_Leads,
                 backgroundColor: "blue",
                 borderColor: "lightblue",
