@@ -16,25 +16,6 @@
             <h4 class="col-12 pt-5 mb-4">
                 REGISTER <i class="ml-2 fa fa-sign-in"></i>
             </h4>
-
-            <div class="col-12 mb-3">  
-            <div class="dropdown">
-                <div class="row">
-                <label for="opco-select" style="color: rgba(90, 84, 84, 0.9); font-size: 17px;" class="col-5">Select your OpCo:</label>
-    
-                <select style="border-bottom: 2px solid rgba(171, 171, 171 , 0.90);" class="col-7" name="pets" id="opco-select">
-                    
-                    <option value="dog">OpCo1</option>
-                    <option value="cat">OpCo2</option>
-                    <option value="hamster">OpCo3</option>
-<<<<<<< HEAD
-=======
-                    
->>>>>>> 5c40d03e3ebed45f5a5aae028105e1795ae9d021
-                </select>
-              </div> 
-            </div>  
-            </div>
         
             <div class="col-12 mb-3">
                 <input type="text" name="name" id="registerName" class="col-12" placeholder="Enter your name" required>
@@ -43,10 +24,26 @@
             <!-- <div class="col-12 mb-3">
                 <input type="text" name="OpCo" id="registerOpco" class="col-12" placeholder="Enter OpCo" required>
             </div> -->
-    
 
             <div class="col-12 mb-3">
-                <input type="email" name="username" id="email" class="col-12" placeholder="Enter Email Id"  size="30" required>
+                <div class="dropdown">
+                    <div class="row">
+                        <label for="opco-select" style="color: rgba(90, 84, 84, 0.9); font-size: 17px;"
+                            class="col-5">Select your OpCo:</label>
+
+                        <select style="border-bottom: 2px solid rgba(171, 171, 171 , 0.90);" class="col-7"
+                            name="pets" id="opco-select">
+
+                            <option value="dog">OpCo1</option>
+                            <option value="cat">OpCo2</option>
+                            <option value="hamster">OpCo3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-12 mb-3">
+                <input type="email" name="username" id="email" class="col-12" placeholder="Enter Email Id" required>
             </div>
         
             <div class="col-12 mb-3">
@@ -70,8 +67,8 @@
         
             <div class="col-12   mt-5">
                 <div class="row">
-                    <input class="col-6 btn btn-primary" value="LOGIN" id="login" onclick="window.location.href='/login'">
-                    <input type="submit" class="col-6 btn btn-danger" id="registerUser" value="REGISTER" onclick="ValidateEmail(username);submit">
+                    <input class="col-6 btn btn-secondary" value="LOGIN" id="login" onclick="window.location.href='/login'">
+                    <input type="submit" class="col-6 btn btn-success" id="registerUser" value="REGISTER" onclick="submit">
                 </div>
             </div> 
         </form>
@@ -96,31 +93,25 @@
     
     var registerPassword = document.getElementById('registerPassword');
     var registerUser = document.getElementById('registerUser');
-
-    function ValidateEmail(inputText)
-{
-
-var mailformat = /.+@(opco1|opco2|opco3|opco4|opco5)\.com$/;
-if(inputText.value.match(mailformat))
-{
-// alert("You have entered a valid email address!");    
-document.username.focus();
-return true;
-}
-else
-{
-alert("You have entered an invalid email address!");    
-document.username.focus();
-return false;
-}
-}
-
     
     function submit() {
         loginBox.style.display = 'none';
         registerBox.style.display = 'block';
     }
     
+    var email = document.getElementById('email');
+    registerUser.addEventListener('click',()=>{
+        console.log(email.value);
+        var mailformat = /.+@(opco1|opco2|opco3)\.com$/;
+        if (!(email.value.match(mailformat))) {
+            alert("You have entered an invalid email address!");
+            event.preventDefault();
+        }
+        else{
+            console.log("Good");
+        }
+    })
+
     registerPassword.addEventListener('keyup',()=>{
         var p = registerPassword.value;
                 
@@ -173,7 +164,5 @@ return false;
        if(password.length < 6 || (!(password.match(/[0-9]+/))) || !(password.match(/[a-z]+/) && password.match(/[A-Z]+/))) {
            event.preventDefault();
        }
-    })
-   
-    </script> 
+    })</script>
 </html>
